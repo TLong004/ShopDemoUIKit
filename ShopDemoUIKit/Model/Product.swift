@@ -8,9 +8,6 @@ struct Product: Codable {
     let images: [String]
     let thumbnail: String
 }
-struct ProductResponse: Codable {
-    let products: [Product]
-}
 struct DataProduct: Codable {
     let products: [Product]
     let total: Int
