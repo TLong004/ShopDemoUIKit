@@ -104,6 +104,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         Task {
             await fetchProducts()
         }
+        if let index = self.categories.firstIndex(where: {$0.slug == category}) {
+            let indexPath = IndexPath(item: index, section: SectionType.category.rawValue)
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -134,7 +138,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProductCell", for: indexPath) as! ProductCell
-            product = products[indexPath.row]
+            self.product = products[indexPath.row]
             cell.setProduct(product!)
             cell.delegate = self
             return cell
@@ -144,8 +148,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: UITextFieldDelegate, ProductCellDelegate {
     func didSelectProduct(_ product: Product) {
-        print("Đã ấn")
+        let storyBoard = UIStoryboard(name: "DetailProduct", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "DetailProduct") as! DetailViewController
+        vc.product = product
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let storyBoard = UIStoryboard(name: "Search", bundle: nil)

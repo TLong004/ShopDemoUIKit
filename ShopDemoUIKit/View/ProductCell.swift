@@ -1,19 +1,27 @@
-//
-//  ProductCell.swift
-//  ShopDemoUIKit
-//
-//  Created by gem on 19/3/26.
-//
 
 import UIKit
-
+protocol ProductCellDelegate: AnyObject {
+    func didSelectProduct(_ product: Product)
+}
 class ProductCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var rating: UILabel!
+
+    var product: Product!
+    weak var delegate: ProductCellDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        name.addGestureRecognizer(tap)
+        
+    }
     
     func setProduct(_ product: Product) {
+        self.product = product
         self.name.text = product.title
         self.price.text = "$\(product.price)"
         let tmp = product.rating.rounded()
@@ -47,5 +55,9 @@ class ProductCell: UICollectionViewCell {
             }
             
         }
+    }
+    
+    @objc func handleTap(){
+        delegate?.didSelectProduct(product)
     }
 }

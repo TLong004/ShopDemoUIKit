@@ -25,4 +25,10 @@ class CategoryCell: UICollectionViewCell {
     @IBAction func didTapCell(_ sender: UIButton) {
         delegate?.didTapCategoryCell(category)
     }
+    override var isSelected: Bool {
+        didSet{
+            button.backgroundColor = isSelected ? .systemBlue : .systemGray6
+            button.setTitleColor(isSelected ? .white : .black, for: .normal)
+        }
+    }
 }
