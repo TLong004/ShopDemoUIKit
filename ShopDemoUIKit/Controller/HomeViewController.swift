@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     var categories: [Category] = []
     var products: [Product] = []
     var phanLoai = ""
+    var product: Product?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,8 @@ class HomeViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.collectionViewLayout = createLayout()
         search.delegate = self
+        let nib = UINib(nibName: "MyProductCell", bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: "MyProductCell")
         Task {
             await fetchProducts(isInitialLoad: true)
         }
@@ -130,17 +133,22 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.delegate = self
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
-            let product = products[indexPath.row]
-            cell.setProduct(product)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProductCell", for: indexPath) as! ProductCell
+            product = products[indexPath.row]
+            cell.setProduct(product!)
+            cell.delegate = self
             return cell
         }
     }
 }
 
-extension HomeViewController: UITextFieldDelegate {
+extension HomeViewController: UITextFieldDelegate, ProductCellDelegate {
+    func didSelectProduct(_ product: Product) {
+        print("Đã ấn")
+    }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let storyBoard = UIStoryboard(name: "Search", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "searchVC") as! SearchViewController
         self.navigationController?.pushViewController(vc, animated: true)
         return false
