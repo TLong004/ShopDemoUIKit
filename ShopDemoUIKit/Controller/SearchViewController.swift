@@ -32,7 +32,9 @@ class SearchViewController: UIViewController {
     
     func createProductLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(150)), subitems: [item])
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        let width = isPad ? 0.2 : 0.36
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(width)), subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
