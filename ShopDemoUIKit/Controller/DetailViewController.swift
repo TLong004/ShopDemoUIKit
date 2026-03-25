@@ -5,6 +5,14 @@ enum SectionTypeDatail: Int, CaseIterable {
     case banner = 0
     case categoryImage = 1
     case productDetail = 2
+    
+    var Identifier: String {
+        switch self {
+        case .banner: return "DetailBanner"
+        case .categoryImage: return "DetailImage"
+        case .productDetail: return "DetailProduct"
+        }
+    }
 }
 
 class DetailViewController: UIViewController {
@@ -93,6 +101,22 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let section = SectionTypeDatail(rawValue: indexPath.section) else {
+            return UICollectionViewCell()
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: section.Identifier, for: indexPath)
+        switch section {
+        case .banner:
+            (cell as? DetailBanner)?.setImage(self.banner)
+        case .categoryImage:
+            (cell as? DetailImageProductCell)?.setImage(images[indexPath.row])
+            (cell as? DetailImageProductCell)?.delegate = self
+        case .productDetail:
+            if let productData = self.product {
+                (cell as? DetailProduct)?.config(product: productData)
+            }
+        }
+        return cell
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailBanner", for: indexPath) as? DetailBanner else {
                 return UICollectionViewCell()

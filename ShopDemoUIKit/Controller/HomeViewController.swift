@@ -5,6 +5,14 @@ enum SectionType: Int, CaseIterable {
     case banner = 0
     case category = 1
     case product = 2
+    
+    var identifier: String {
+        switch self {
+        case .banner: return "BannerCell"
+        case .category: return "CategoryCell"
+        case .product: return "MyProductCell"
+        }
+    }
 }
 
 class HomeViewController: UIViewController {
@@ -37,15 +45,14 @@ class HomeViewController: UIViewController {
     func fetchProducts(isInitialLoad: Bool = false) async {
         do {
             if isInitialLoad {
-                let reponse: ProductResponse = try await NetworkManager.shared.request(urlString: API.banner)
-                let categoriesRep: [Category] = try await NetworkManager.shared.request(urlString: API.category)
-                banners = reponse.products
-                categories = categoriesRep
+                async let reponse: ProductResponse = NetworkManager.shared.request(urlString: API.banner)
+                async let categories: [Category] = NetworkManager.shared.request(urlString: API.category)
+                let (bannersRep, categoriesRep) = try await (reponse, categories)
+                banners = bannersRep.products
+                self.categories = categoriesRep
                 let cat = Category(slug: "", name: "All", url: "")
-                categories.insert(cat, at: 0)
+                self.categories.insert(cat, at: 0)
                 collectionView.reloadData()
-                
-                print(categories)
             }
             let url = phanLoai == "" ? API.products : API.products + "/category/\(phanLoai)"
             let data: DataProduct = try await NetworkManager.shared.request(urlString: url)
@@ -127,24 +134,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BannerCell", for: indexPath) as! BannerCell
-            cell.setImage(banners[indexPath.row].thumbnail)
-            return cell
-        } else if indexPath.section == 1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-            let category = categories[indexPath.row]
-            let slug = category.slug
-            cell.setButtonTitle(category.name, slug: slug)
-            cell.delegate = self
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProductCell", for: indexPath) as! ProductCell
-            self.product = products[indexPath.row]
-            cell.setProduct(product!)
-            cell.delegate = self
-            return cell
+        guard let section = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell() }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: section.identifier, for: indexPath)
+        switch section {
+        case .banner:
+            (cell as? BannerCell)?.setImage(banners[indexPath.row].thumbnail)
+        case .category:
+            let cat = categories[indexPath.row]
+            (cell as? CategoryCell)?.setButtonTitle(cat.name, slug: cat.slug)
+            (cell as? CategoryCell)?.delegate = self
+        case .product:
+            (cell as? ProductCell)?.setProduct(products[indexPath.row])
+            (cell as? ProductCell)?.delegate = self
         }
+        return cell
     }
 }
 

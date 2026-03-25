@@ -1,11 +1,7 @@
-//
-//  DetailImageProductCell.swift
-//  ShopDemoUIKit
-//
-//  Created by gem on 20/3/26.
-//
 
 import UIKit
+import Kingfisher
+
 protocol tapImageProductDelegate: AnyObject {
     func didSelectImage(image: String)
 }
@@ -25,29 +21,7 @@ class DetailImageProductCell: UICollectionViewCell {
     
     func setImage(_ imageUrl: String){
         self.imageUrl = imageUrl
-        let cacheKey = NSString(string: imageUrl)
-        
-        if let imageCache = ImageCache.shared.object(forKey: cacheKey) {
-            print("Đã lấy ảnh từ cache")
-            self.detailImage.image = imageCache
-            return
-        }
-        Task {
-            guard let url = URL(string: imageUrl) else {
-                return
-            }
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                guard let image = UIImage(data: data) else {
-                    return
-                }
-                ImageCache.shared.setObject(image, forKey: cacheKey)
-                print("Đã lưu ảnh vào cache")
-                self.detailImage.image = image
-            } catch {
-                print("Lỗi tải ảnh")
-            }
-        }
+        detailImage.setImage(imageUrl)
     }
     
     override var isSelected: Bool {
@@ -58,6 +32,7 @@ class DetailImageProductCell: UICollectionViewCell {
     }
     
     @objc func handleTapGesture() {
-        delegate?.didSelectImage(image: imageUrl)
+        guard let url = imageUrl else { return }
+        delegate?.didSelectImage(image: url)
     }
 }
