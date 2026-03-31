@@ -144,8 +144,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             (cell as? CategoryCell)?.setButtonTitle(cat.name, slug: cat.slug)
             (cell as? CategoryCell)?.delegate = self
         case .product:
-            (cell as? ProductCell)?.setProduct(products[indexPath.row])
+            let product = products[indexPath.row]
+            (cell as? ProductCell)?.setProduct(product)
             (cell as? ProductCell)?.delegate = self
+            (cell as? ProductCell)?.addButton = {
+                CartManager.shared.addToCart(product: product)
+                CartManager.shared.showToast(message: "Đã thêm vào giỏ hàng", view: self.view)
+            }
         }
         return cell
     }

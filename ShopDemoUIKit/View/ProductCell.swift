@@ -10,6 +10,8 @@ class ProductCell: UICollectionViewCell {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var rating: UILabel!
+    
+    var addButton: (() -> Void)?
 
     var product: Product!
     weak var delegate: ProductCellDelegate?
@@ -39,6 +41,9 @@ class ProductCell: UICollectionViewCell {
         self.image.setImage(product.thumbnail)
     }
     
+    @IBAction func addProduct(_ sender: Any) {
+        self.addButton?()
+    }
     @objc func handleTap(){
         delegate?.didSelectProduct(product)
     }

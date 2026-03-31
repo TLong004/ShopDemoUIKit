@@ -120,6 +120,9 @@
                         <variation key="heightClass=regular-widthClass=regular">
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="26"/>
                         </variation>
+                        <connections>
+                            <action selector="addProduct:" destination="gTV-IL-0wX" eventType="touchUpInside" id="On7-hz-HNm"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="itZ-2w-g6h">
                         <rect key="frame" x="0.0" y="10" width="547" height="2"/>

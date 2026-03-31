@@ -1,8 +1,11 @@
-//
-//  UserReview.swift
-//  ShopDemoUIKit
-//
-//  Created by gem on 31/3/26.
-//
 
 import Foundation
+
+struct UserReview: Codable {
+    let productId: Int
+    let rating: Int
+    let content: String
+    let images: [String]
+    let userName: String
+    let createdAt: Date
+}

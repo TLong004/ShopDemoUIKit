@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -184,21 +185,89 @@
             </objects>
             <point key="canvasLocation" x="117" y="915"/>
         </scene>
-        <!--Cart-->
+        <!--My Cart-->
         <scene sceneID="x6z-hr-5zj">
             <objects>
                 <viewController id="DFd-ut-jWs" customClass="CartController" customModule="ShopDemoUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R4c-1i-myM">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mhc-TY-A6f">
+                                <rect key="frame" x="0.0" y="172" width="393" height="463"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NtC-a4-eg4">
+                                <rect key="frame" x="0.0" y="635" width="393" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QB-qW-ZaF">
+                                        <rect key="frame" x="341" y="10" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ot-7h-N4J">
+                                        <rect key="frame" x="9.9999999999999964" y="10" width="44.666666666666657" height="19"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4a-yE-wdV">
+                                        <rect key="frame" x="10" y="50" width="373" height="40"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="M0j-ee-mPd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Checkout">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tapCheck:" destination="DFd-ut-jWs" eventType="touchUpInside" id="ciC-v1-cGH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="4QB-qW-ZaF" secondAttribute="trailing" constant="10" id="C2H-bI-wj8"/>
+                                    <constraint firstAttribute="trailing" secondItem="e4a-yE-wdV" secondAttribute="trailing" constant="10" id="Hos-d7-eYK"/>
+                                    <constraint firstItem="7Ot-7h-N4J" firstAttribute="top" secondItem="NtC-a4-eg4" secondAttribute="top" constant="10" id="Jmg-bi-X3U"/>
+                                    <constraint firstAttribute="bottom" secondItem="e4a-yE-wdV" secondAttribute="bottom" constant="10" id="Pgp-E2-fen"/>
+                                    <constraint firstItem="e4a-yE-wdV" firstAttribute="leading" secondItem="NtC-a4-eg4" secondAttribute="leading" constant="10" id="TFM-Sr-aHN"/>
+                                    <constraint firstItem="4QB-qW-ZaF" firstAttribute="top" secondItem="NtC-a4-eg4" secondAttribute="top" constant="10" id="ZAa-Io-ziA"/>
+                                    <constraint firstItem="7Ot-7h-N4J" firstAttribute="leading" secondItem="NtC-a4-eg4" secondAttribute="leading" constant="10" id="pZx-uI-ehX"/>
+                                    <constraint firstAttribute="height" constant="100" id="yaT-zS-4bf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="eD9-qg-m4b"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mhc-TY-A6f" firstAttribute="leading" secondItem="eD9-qg-m4b" secondAttribute="leading" id="75H-0t-Vl9"/>
+                            <constraint firstItem="NtC-a4-eg4" firstAttribute="leading" secondItem="R4c-1i-myM" secondAttribute="leading" id="7vK-tF-vsF"/>
+                            <constraint firstItem="NtC-a4-eg4" firstAttribute="top" secondItem="mhc-TY-A6f" secondAttribute="bottom" id="Lyp-YY-m5h"/>
+                            <constraint firstItem="NtC-a4-eg4" firstAttribute="bottom" secondItem="eD9-qg-m4b" secondAttribute="bottom" id="Zge-D3-AfN"/>
+                            <constraint firstItem="mhc-TY-A6f" firstAttribute="top" secondItem="eD9-qg-m4b" secondAttribute="top" id="hHC-lK-aNa"/>
+                            <constraint firstItem="mhc-TY-A6f" firstAttribute="trailing" secondItem="eD9-qg-m4b" secondAttribute="trailing" id="qyA-Y3-Ztu"/>
+                            <constraint firstAttribute="trailing" secondItem="NtC-a4-eg4" secondAttribute="trailing" id="rdf-c9-pI5"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Cart" image="cart.fill" catalog="system" id="kKP-VF-iMa"/>
+                    <navigationItem key="navigationItem" title="My Cart" id="kWB-mK-qRJ"/>
+                    <connections>
+                        <outlet property="checkOutBtn" destination="e4a-yE-wdV" id="bhp-eF-Sjt"/>
+                        <outlet property="tableView" destination="mhc-TY-A6f" id="xW3-Tw-e6i"/>
+                        <outlet property="totalLabel" destination="4QB-qW-ZaF" id="ylw-3R-ITe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kie-m0-2SY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="898"/>
+            <point key="canvasLocation" x="1982.4427480916029" y="897.88732394366207"/>
         </scene>
         <!--Profile-->
         <scene sceneID="8oA-Qt-dUp">
@@ -214,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfz-27-6gQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2095" y="904"/>
+            <point key="canvasLocation" x="3020.6106870229005" y="903.52112676056345"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Z61-73-fXf">
@@ -228,7 +297,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="CyH-mO-rYH" kind="relationship" relationship="viewControllers" id="aa5-5u-uPe"/>
-                        <segue destination="DFd-ut-jWs" kind="relationship" relationship="viewControllers" id="Dam-44-I7B"/>
+                        <segue destination="QHF-g4-KrX" kind="relationship" relationship="viewControllers" id="Dam-44-I7B"/>
                         <segue destination="XQ0-bm-4Ks" kind="relationship" relationship="viewControllers" id="tOR-zF-zPk"/>
                         <segue destination="P50-sK-mCq" kind="relationship" relationship="viewControllers" id="ubv-Qn-40n"/>
                     </connections>
@@ -243,20 +312,42 @@
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="130.98591549295776"/>
         </scene>
+        <!--Cart-->
+        <scene sceneID="kV4-Io-loE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QHF-g4-KrX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cart" image="cart.fill" catalog="system" id="kKP-VF-iMa"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WmJ-gs-K4Q">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DFd-ut-jWs" kind="relationship" relationship="rootViewController" id="Gat-iI-qX6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OIl-TK-Zes" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055.7251908396945" y="897.88732394366207"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
