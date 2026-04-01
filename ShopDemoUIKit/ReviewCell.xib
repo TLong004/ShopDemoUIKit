@@ -122,6 +122,9 @@
                                 <integer key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="tapSave:" destination="gTV-IL-0wX" eventType="touchUpInside" id="1TT-yY-mWz"/>
+                        </connections>
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9of-zt-5Hq">
                         <rect key="frame" x="10" y="278" width="466" height="200"/>
@@ -158,6 +161,9 @@
                                 <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="tapMedia:" destination="gTV-IL-0wX" eventType="touchUpInside" id="QBr-FU-G6S"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Viết đánh giá từ 50 kí tự" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcc-TI-bOv">
                         <rect key="frame" x="10" y="247.66666666666663" width="181.66666666666666" height="20.333333333333371"/>
@@ -197,6 +203,8 @@
                 <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="content" destination="9of-zt-5Hq" id="Z96-n9-feQ"/>
+                <outlet property="saveBtn" destination="iBv-dY-c4L" id="pJT-PQ-Aks"/>
                 <outlet property="stackView" destination="LcH-oW-5kO" id="LzQ-9a-peF"/>
             </connections>
             <point key="canvasLocation" x="445.80152671755724" y="47.183098591549296"/>
@@ -212,10 +220,10 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

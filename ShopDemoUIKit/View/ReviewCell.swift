@@ -2,11 +2,44 @@
 
 import UIKit
 
+protocol ReviewCellDelegate: AnyObject {
+    func didTapMedia()
+}
+
 class ReviewCell: UICollectionViewCell {
 
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var content: UITextView!
     
+    weak var delegate: ReviewCellDelegate?
     
+    @IBAction func tapMedia(_ sender: Any) {
+        delegate?.didTapMedia()
+    }
+    var review: UserReview?
+    var imagesReview: [String] = []
+    
+    @IBAction func tapSave(_ sender: Any) {
+        if let currentReview = review {
+            var updatedReview = currentReview
+            updatedReview.content = content.text ?? ""
+            print(self.imagesReview)
+            updatedReview.images = self.imagesReview
+            
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            updatedReview.createdAt = formatter.string(from: now)
+            
+            ReviewManager.shared.addReview(userReview: updatedReview)
+            let user = ReviewManager.shared.loadReview(forProductId: review!.productId)
+            print("Lưu review thành công")
+            print(user)
+        } else {
+            print("Lỗi")
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,7 +51,7 @@ class ReviewCell: UICollectionViewCell {
     
     @IBAction func didTapReview(_ sender: UIButton) {
         let rating = sender.tag
-        print("Đánh giá sản phẩm: \(rating)")
+        review?.rating = rating
         updateUI(rating: rating)
     }
     
@@ -33,8 +66,12 @@ class ReviewCell: UICollectionViewCell {
         }
     }
     
-    func setReview() {
-        print("Hiện thị thông tin sản phẩm")
+    func setReview(productId: Int) {
+        if review == nil {
+            review = UserReview(productId: productId, rating: 0, content: "", images: [], createdAt: "")
+        } else {
+            review?.productId = productId
+        }
     }
 
 }

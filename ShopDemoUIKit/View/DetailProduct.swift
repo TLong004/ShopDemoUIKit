@@ -13,7 +13,7 @@ class DetailProduct: UICollectionViewCell {
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var name: UILabel!
-    
+
     func config(product: Product){
         name.text = product.title
         price.text = "$\(product.price)"

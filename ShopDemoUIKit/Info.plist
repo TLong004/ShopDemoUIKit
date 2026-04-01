@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App cần truy cập Micro để ghi âm khi bạn quay video.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App cần truy cập thư viện để bạn chọn ảnh/video có sẵn.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App cần truy cập Camera để bạn chụp ảnh/quay video đánh giá.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

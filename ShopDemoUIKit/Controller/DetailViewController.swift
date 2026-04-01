@@ -31,6 +31,7 @@ class DetailViewController: UIViewController {
     
     var images: [String] = []
     var banner: String = ""
+    var imagesRV: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,18 +45,7 @@ class DetailViewController: UIViewController {
         collectionView.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: SectionTypeDatail.review.Identifier)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        guard let product = product else { return }
-        
-        collectionView.reloadData()
-        
-        if CartManager.shared.isChecout(product: product) {
-            print("Sản phẩm đã mua -> Hiện Review")
-        } else {
-            print("Sản phẩm chưa mua -> Ẩn Review")
-        }
-    }
+   
     
     func createLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout {
@@ -95,6 +85,7 @@ class DetailViewController: UIViewController {
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
+
 
 }
 extension DetailViewController: UICollectionViewDataSource, tapImageProductDelegate {
@@ -144,8 +135,48 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
                 (cell as? DetailProduct)?.config(product: productData)
             }
         case .review:
-            (cell as? ReviewCell)?.setReview()
+            (cell as? ReviewCell)?.delegate = self
+            (cell as? ReviewCell)?.imagesReview = self.imagesRV
+            (cell as? ReviewCell)?.setReview(productId: self.product!.id)
         }
         return cell
     }
+}
+
+extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, ReviewCellDelegate {
+    func didTapMedia() {
+        let popup = CustomPopupViewController()
+        
+        popup.modalTransitionStyle = .crossDissolve
+        popup.modalPresentationStyle = .overCurrentContext
+        
+        popup.onSelectSource = { [weak self] source in
+            self?.presentPicker(source: source)
+        }
+        
+        present(popup, animated: true, completion: nil)
+    }
+    
+    func presentPicker(source: UIImagePickerController.SourceType) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = source
+        picker.allowsEditing = true
+        picker.mediaTypes = ["public.image", "public.movie"]
+        present(picker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            if let image = info[.editedImage] as? UIImage {
+                print("Đã lấy được ảnh \(image)")
+                self.imagesRV.append(image.description)
+                let section = IndexSet(integer: SectionTypeDatail.review.rawValue)
+                self.collectionView.reloadSections(section)
+            } else if let video = info[.mediaURL] as? URL {
+                print("Đã lấy được video \(video)")
+            }
+        }
+    }
+    
 }
