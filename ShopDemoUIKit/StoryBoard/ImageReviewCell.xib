@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageReviewCell" id="gTV-IL-0wX" customClass="ImageReviewCell" customModule="ShopDemoUIKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="138"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="240" height="138"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-qw-Lz4">
+                        <rect key="frame" x="8" y="8" width="224" height="122"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KW4-NI-ifY">
+                        <rect key="frame" x="216" y="8" width="16" height="16"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="KW4-NI-ifY" secondAttribute="height" multiplier="1:1" id="TLv-pH-iCU"/>
+                            <constraint firstAttribute="width" constant="16" id="vPt-OP-9Cb"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="minus.circle" catalog="system">
+                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="deleteImage:" destination="gTV-IL-0wX" eventType="touchUpInside" id="IZr-iB-PwI"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="KW4-NI-ifY" firstAttribute="trailing" secondItem="Rd9-qw-Lz4" secondAttribute="trailing" id="9lU-Gj-Ftr"/>
+                <constraint firstAttribute="trailing" secondItem="Rd9-qw-Lz4" secondAttribute="trailing" constant="8" id="D9O-c3-McW"/>
+                <constraint firstItem="Rd9-qw-Lz4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="GZ1-nY-bUP"/>
+                <constraint firstAttribute="bottom" secondItem="Rd9-qw-Lz4" secondAttribute="bottom" constant="8" id="ZmF-Z4-DAP"/>
+                <constraint firstItem="KW4-NI-ifY" firstAttribute="top" secondItem="Rd9-qw-Lz4" secondAttribute="top" id="k9u-Za-slS"/>
+                <constraint firstItem="Rd9-qw-Lz4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ylk-5X-448"/>
+            </constraints>
+            <size key="customSize" width="240" height="138"/>
+            <connections>
+                <outlet property="deleteBtn" destination="KW4-NI-ifY" id="pBz-e5-9WE"/>
+                <outlet property="imageReview" destination="Rd9-qw-Lz4" id="wWi-L1-hGz"/>
+            </connections>
+            <point key="canvasLocation" x="277.86259541984731" y="137.32394366197184"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="minus.circle" catalog="system" width="128" height="123"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

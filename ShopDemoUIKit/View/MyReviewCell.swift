@@ -1,0 +1,17 @@
+//
+//  MyReviewCell.swift
+//  ShopDemoUIKit
+//
+//  Created by gem on 2/4/26.
+//
+
+import UIKit
+
+class MyReviewCell: UICollectionViewCell {
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+}
