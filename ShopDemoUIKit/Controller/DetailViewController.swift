@@ -6,6 +6,7 @@ enum SectionTypeDatail: Int, CaseIterable {
     case categoryImage = 1
     case productDetail = 2
     case review = 3
+    case myReview = 4
     
     var Identifier: String {
         switch self {
@@ -13,6 +14,7 @@ enum SectionTypeDatail: Int, CaseIterable {
         case .categoryImage: return "DetailImage"
         case .productDetail: return "DetailProduct"
         case .review: return "ReviewCell"
+        case .myReview: return "MyReviewCell"
         }
     }
 }
@@ -31,7 +33,7 @@ class DetailViewController: UIViewController {
     
     var images: [String] = []
     var banner: String = ""
-    var imagesRV: [String] = []
+    var imagesRV: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,8 @@ class DetailViewController: UIViewController {
         let bannerSection = IndexSet(integer: SectionTypeDatail.banner.rawValue)
         collectionView.reloadSections(bannerSection)
         collectionView.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: SectionTypeDatail.review.Identifier)
+        collectionView.register(UINib(nibName: "MyReviewCell", bundle: nil), forCellWithReuseIdentifier: SectionTypeDatail.myReview.Identifier)
+
     }
     
    
@@ -58,6 +62,8 @@ class DetailViewController: UIViewController {
             case .productDetail:
                 return self.createProductLayout()
             case .review:
+                return self.createProductLayout()
+            case .myReview:
                 return self.createProductLayout()
             }
         }
@@ -102,8 +108,9 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         let isBought = CartManager.shared.isChecout(product: self.product)
+        let isReview = ReviewManager.shared.isReview(product: self.product)
         if !isBought {
-            return SectionTypeDatail.allCases.count - 1
+            return isReview ? SectionTypeDatail.allCases.count - 1 : SectionTypeDatail.allCases.count - 2
         }
         return SectionTypeDatail.allCases.count
     }
@@ -113,7 +120,9 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
         case .categoryImage:
             return self.images.count
         case .review:
-            return CartManager.shared.isChecout(product: product) ? 1 : 0
+            return CartManager.shared.isChecout(product: product) && !ReviewManager.shared.isReview(product: product) ? 1 : 0
+        case .myReview:
+            return ReviewManager.shared.isReview(product: self.product) ? 1 : 0
         default:
             return 1
         }
@@ -136,14 +145,28 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
             }
         case .review:
             (cell as? ReviewCell)?.delegate = self
-            (cell as? ReviewCell)?.imagesReview = self.imagesRV
+            (cell as? ReviewCell)?.selectedImages = self.imagesRV
             (cell as? ReviewCell)?.setReview(productId: self.product!.id)
+        case .myReview:
+            (cell as? MyReviewCell)?.config(product: self.product)
         }
         return cell
     }
 }
 
 extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, ReviewCellDelegate {
+    func didUpdateImages(images: [UIImage]) {
+        self.imagesRV = images
+        UIView.performWithoutAnimation {
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }
+        if ReviewManager.shared.isReview(product: product) {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     func didTapMedia() {
         let popup = CustomPopupViewController()
         
@@ -170,7 +193,7 @@ extension DetailViewController: UIImagePickerControllerDelegate, UINavigationCon
         picker.dismiss(animated: true) {
             if let image = info[.editedImage] as? UIImage {
                 print("Đã lấy được ảnh \(image)")
-                self.imagesRV.append(image.description)
+                self.imagesRV.append(image)
                 let section = IndexSet(integer: SectionTypeDatail.review.rawValue)
                 self.collectionView.reloadSections(section)
             } else if let video = info[.mediaURL] as? URL {

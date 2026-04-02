@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ButtonImageCell" id="gTV-IL-0wX" customClass="ButtonImageCell" customModule="ShopDemoUIKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="176"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="339" height="176"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHw-N9-aix" customClass="DesignableButton" customModule="ShopDemoUIKit" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="176"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="camera" catalog="system" imagePlacement="top" title="Hình ảnh/ Video/ Video theo mẫu">
+                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="fHw-N9-aix" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0Uf-DW-U28"/>
+                <constraint firstAttribute="bottom" secondItem="fHw-N9-aix" secondAttribute="bottom" id="Hol-7d-Oqv"/>
+                <constraint firstAttribute="trailing" secondItem="fHw-N9-aix" secondAttribute="trailing" id="TQc-5U-kCL"/>
+                <constraint firstItem="fHw-N9-aix" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hmK-Zm-6sD"/>
+            </constraints>
+            <size key="customSize" width="339" height="176"/>
+            <connections>
+                <outlet property="button" destination="fHw-N9-aix" id="6r3-9w-ea6"/>
+            </connections>
+            <point key="canvasLocation" x="353.43511450381681" y="126.7605633802817"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="camera" catalog="system" width="128" height="93"/>
+    </resources>
+</document>

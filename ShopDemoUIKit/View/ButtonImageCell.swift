@@ -7,11 +7,22 @@
 
 import UIKit
 
-class ButtonImageCell: UICollectionViewCell {
 
+class ButtonImageCell: UICollectionViewCell {
+    
+    @IBOutlet weak var button: DesignableButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    func confige(check: Bool){
+        if check {
+            button.setTitle("Hình ảnh/ Video/ Video theo mẫu", for: .normal)
+            button.imageView?.image = UIImage(systemName: "camera")
+        } else {
+            button.setTitle("Tải lên", for: .normal)
+            button.imageView?.image = UIImage(systemName: "camera")
+        }
     }
 
 }
