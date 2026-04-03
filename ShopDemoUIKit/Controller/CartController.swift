@@ -32,7 +32,15 @@ class CartController: UIViewController {
         totalLabel.text = "$" + String(format: "%.2f", total)
     }
 }
-extension CartController: UITableViewDelegate, UITableViewDataSource {
+extension CartController: UITableViewDelegate, UITableViewDataSource, ProductCellDelegate {
+    func didSelectProduct(_ product: Product) {
+        let storyBoard = UIStoryboard(name: "DetailProduct", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "DetailProduct") as! DetailViewController
+        vc.product = product
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         CartManager.shared.products.count
     }
@@ -52,6 +60,7 @@ extension CartController: UITableViewDelegate, UITableViewDataSource {
             CartManager.shared.showToast(message: "Đã xoá khỏi giỏ hàng", view: self.view)
             self.updateTotalUI()
         }
+        cell.delegate = self
         return cell
     }
     

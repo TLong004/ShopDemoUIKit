@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-qw-Lz4">
-                        <rect key="frame" x="8" y="8" width="224" height="122"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="138"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="10"/>
@@ -26,7 +26,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KW4-NI-ifY">
-                        <rect key="frame" x="216" y="8" width="16" height="16"/>
+                        <rect key="frame" x="224" y="0.0" width="16" height="16"/>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="KW4-NI-ifY" secondAttribute="height" multiplier="1:1" id="TLv-pH-iCU"/>
@@ -45,11 +45,11 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="KW4-NI-ifY" firstAttribute="trailing" secondItem="Rd9-qw-Lz4" secondAttribute="trailing" id="9lU-Gj-Ftr"/>
-                <constraint firstAttribute="trailing" secondItem="Rd9-qw-Lz4" secondAttribute="trailing" constant="8" id="D9O-c3-McW"/>
-                <constraint firstItem="Rd9-qw-Lz4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="GZ1-nY-bUP"/>
-                <constraint firstAttribute="bottom" secondItem="Rd9-qw-Lz4" secondAttribute="bottom" constant="8" id="ZmF-Z4-DAP"/>
+                <constraint firstAttribute="trailing" secondItem="Rd9-qw-Lz4" secondAttribute="trailing" id="D9O-c3-McW"/>
+                <constraint firstItem="Rd9-qw-Lz4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GZ1-nY-bUP"/>
+                <constraint firstAttribute="bottom" secondItem="Rd9-qw-Lz4" secondAttribute="bottom" id="ZmF-Z4-DAP"/>
                 <constraint firstItem="KW4-NI-ifY" firstAttribute="top" secondItem="Rd9-qw-Lz4" secondAttribute="top" id="k9u-Za-slS"/>
-                <constraint firstItem="Rd9-qw-Lz4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ylk-5X-448"/>
+                <constraint firstItem="Rd9-qw-Lz4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ylk-5X-448"/>
             </constraints>
             <size key="customSize" width="240" height="138"/>
             <connections>

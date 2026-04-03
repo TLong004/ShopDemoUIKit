@@ -86,6 +86,10 @@ extension SearchViewController: UICollectionViewDataSource, ProductCellDelegate 
         let product = products[indexPath.row]
         cell.setProduct(product)
         cell.delegate = self
+        cell.addButton = {
+            CartManager.shared.addToCart(product: product)
+            CartManager.shared.showToast(message: "Đã thêm vào giỏ hàng", view: self.view)
+        }
         return cell
     }
 }

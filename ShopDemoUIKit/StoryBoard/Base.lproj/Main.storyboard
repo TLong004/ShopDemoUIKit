@@ -149,11 +149,11 @@
             </objects>
             <point key="canvasLocation" x="1993.1297709923663" y="130.98591549295776"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="4lR-vG-c4a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CyH-mO-rYH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="540-hQ-PfH"/>
+                    <tabBarItem key="tabBarItem" title="" image="house.fill" catalog="system" id="540-hQ-PfH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ny7-lS-p3M">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>
@@ -169,7 +169,23 @@
             </objects>
             <point key="canvasLocation" x="1066.4122137404579" y="130.98591549295776"/>
         </scene>
-        <!--Favourite-->
+        <!--View Controller-->
+        <scene sceneID="ZZU-s1-7vw">
+            <objects>
+                <viewController id="Yjd-VP-8Ou" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KQ8-JO-rHe">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Oft-aQ-tV2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="wallet.bifold.fill" catalog="system" id="TYp-yO-ExJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ceg-bD-k1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-763" y="932"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="xly-ax-BLx">
             <objects>
                 <viewController id="XQ0-bm-4Ks" sceneMemberID="viewController">
@@ -179,7 +195,7 @@
                         <viewLayoutGuide key="safeArea" id="NFR-T0-RkB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favourite" image="heart.fill" catalog="system" id="ZIA-N4-o5G"/>
+                    <tabBarItem key="tabBarItem" title="" image="heart.fill" catalog="system" id="ZIA-N4-o5G"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PVc-i0-A6J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -269,7 +285,7 @@
             </objects>
             <point key="canvasLocation" x="1982.4427480916029" y="897.88732394366207"/>
         </scene>
-        <!--Profile-->
+        <!--View Controller-->
         <scene sceneID="8oA-Qt-dUp">
             <objects>
                 <viewController id="P50-sK-mCq" sceneMemberID="viewController">
@@ -279,16 +295,16 @@
                         <viewLayoutGuide key="safeArea" id="B9w-hJ-Enf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="I1H-wv-Hrx"/>
+                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="I1H-wv-Hrx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfz-27-6gQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3020.6106870229005" y="903.52112676056345"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main-->
         <scene sceneID="Z61-73-fXf">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="SWc-Gn-tLG" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="SWc-Gn-tLG" customClass="Main" customModule="ShopDemoUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OWE-BY-0vq">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -300,6 +316,7 @@
                         <segue destination="QHF-g4-KrX" kind="relationship" relationship="viewControllers" id="Dam-44-I7B"/>
                         <segue destination="XQ0-bm-4Ks" kind="relationship" relationship="viewControllers" id="tOR-zF-zPk"/>
                         <segue destination="P50-sK-mCq" kind="relationship" relationship="viewControllers" id="ubv-Qn-40n"/>
+                        <segue destination="Yjd-VP-8Ou" kind="relationship" relationship="viewControllers" id="RsN-gu-K5L"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IbN-nJ-9Yj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -312,11 +329,11 @@
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="130.98591549295776"/>
         </scene>
-        <!--Cart-->
+        <!--Navigation Controller-->
         <scene sceneID="kV4-Io-loE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QHF-g4-KrX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cart" image="cart.fill" catalog="system" id="kKP-VF-iMa"/>
+                    <tabBarItem key="tabBarItem" title="" image="cart.fill" catalog="system" id="kKP-VF-iMa"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WmJ-gs-K4Q">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>
@@ -337,6 +354,7 @@
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="wallet.bifold.fill" catalog="system" width="128" height="104"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -344,10 +362,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

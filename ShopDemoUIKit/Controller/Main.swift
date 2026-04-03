@@ -1,29 +1,33 @@
-//
-//  Main.swift
-//  ShopDemoUIKit
-//
-//  Created by gem on 3/4/26.
-//
+
 
 import UIKit
 
-class Main: UITabBarController {
+class Main: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBadge), name: NSNotification.Name("cartUpdate"), object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func updateBadge() {
+        if let tab = self.viewControllers?[1] {
+            let count = CartManager.shared.totalItems
+            tab.tabBarItem.badgeValue = count == 0 ? nil : "\(count)"
+        }
     }
-    */
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        CartManager.shared.totalItems = 0
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        if let nav = viewController as? UINavigationController {
+            nav.popToRootViewController(animated: false)
+        }
+        return true
+    }
+    
 
 }

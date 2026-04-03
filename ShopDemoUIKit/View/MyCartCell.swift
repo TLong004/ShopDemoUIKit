@@ -14,10 +14,14 @@ class MyCartCell: UITableViewCell {
     @IBOutlet weak var imageProduct: UIImageView!
     
     var onQuantityChanged: (() -> Void)?
+    weak var delegate: ProductCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         quantityTextField.delegate = self
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        nameProduct.addGestureRecognizer(tap)
+        nameProduct.isUserInteractionEnabled = true
     }
     
     var product: Product?
@@ -57,6 +61,11 @@ class MyCartCell: UITableViewCell {
         self.quantity = quantity
         self.product = product
     }
+    
+    @objc func handleTap(){
+        print("Đã ấn")
+        delegate?.didSelectProduct(self.product!)
+    }
 }
 extension MyCartCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -70,5 +79,10 @@ extension MyCartCell: UITextFieldDelegate {
             return true
         }
         return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowed = CharacterSet.decimalDigits
+        return string.rangeOfCharacter(from: allowed.inverted) == nil
     }
 }

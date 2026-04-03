@@ -6,6 +6,7 @@ class MyReviewCell: UICollectionViewCell {
     @IBOutlet weak var reatingStack: UIStackView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var countChar: UILabel!
     
     var images: [UIImage] = []
     
@@ -19,7 +20,10 @@ class MyReviewCell: UICollectionViewCell {
         collectionView.dataSource = self
         collectionView.collectionViewLayout = self.createLayout()
         
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
     }
+
     
     func config(product: Product) {
         self.images = []
@@ -39,6 +43,15 @@ class MyReviewCell: UICollectionViewCell {
                     self.images.append(diskImage)
                 }
             }
+        }
+        
+        if self.textView.text.count == 0 {
+            self.countChar.isHidden = true
+            self.textView.isHidden = true
+        } else {
+            self.countChar.isHidden = false
+            self.textView.isHidden = false
+            self.countChar.text = "\(self.textView.text.count) ký tự"
         }
         
         self.collectionView.reloadData()

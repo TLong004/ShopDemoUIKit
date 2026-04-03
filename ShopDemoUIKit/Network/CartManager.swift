@@ -5,7 +5,13 @@ import UIKit
 
 class CartManager {
     static let shared = CartManager()
+    var totalItems: Int {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name("cartUpdate"), object: nil)
+        }
+    }
     private init() {
+        self.totalItems = 0
         products = self.loadCart(key: self.cartKey)
         total = products.reduce(0) { $0 + Double($1.quantity) * $1.product.price }
     }
@@ -22,6 +28,7 @@ class CartManager {
             products.append(CartItem(product: product, quantity: 1, isCheckedOut: false))
         }
         total += product.price
+        self.totalItems += 1
         self.saveCart(items: products, key: self.cartKey)
     }
     

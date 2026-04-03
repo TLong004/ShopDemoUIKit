@@ -6,6 +6,7 @@ import UIKit
 protocol ReviewCellDelegate: AnyObject {
     func didTapMedia()
     func didUpdateImages(images: [UIImage])
+    func didUpdateReviewData(content: String, rating: Int)
 }
 
 class ReviewCell: UICollectionViewCell {
@@ -30,7 +31,7 @@ class ReviewCell: UICollectionViewCell {
     }
     
     var imagesRV: [String] = []
-    
+    var rating: Int = 0
     var review: UserReview?
     
     @IBAction func tapSave(_ sender: Any) {
@@ -42,6 +43,7 @@ class ReviewCell: UICollectionViewCell {
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy"
             updatedReview.createdAt = formatter.string(from: now)
+            updatedReview.rating = self.rating
             for image in selectedImages {
                 imagesRV.append(ReviewManager.shared.saveImageToDisk(image: image)!)
             }
@@ -51,6 +53,8 @@ class ReviewCell: UICollectionViewCell {
             self.imagesRV = []
             self.selectedImages = []
             self.delegate?.didUpdateImages(images: [])
+            
+            print(updatedReview.rating)
             
             guard let user = ReviewManager.shared.loadReview(forProductId: updatedReview.productId) else {
                 print("Không tìm thấy review cho id")
@@ -64,6 +68,7 @@ class ReviewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.content.delegate = self
         for (index, view) in stackView.arrangedSubviews.enumerated() {
             view.tag = index + 1
         }
@@ -76,9 +81,10 @@ class ReviewCell: UICollectionViewCell {
     }
     
     @IBAction func didTapReview(_ sender: UIButton) {
-        let rating = sender.tag
+        self.rating = sender.tag
         review?.rating = rating
         updateUI(rating: rating)
+        delegate?.didUpdateReviewData(content: content.text, rating: rating)
     }
     
     func updateUI(rating: Int) {
@@ -107,7 +113,7 @@ class ReviewCell: UICollectionViewCell {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(width),
                                                   heightDimension: .fractionalWidth(0.25))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .estimated(100))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -157,5 +163,11 @@ extension ReviewCell: ImageReviewCellDelegate {
         selectedImages.remove(at: index)
         delegate?.didUpdateImages(images: selectedImages)
         collectionView.reloadData()
+    }
+}
+
+extension ReviewCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.didUpdateReviewData(content: self.content.text ?? "", rating: self.rating)
     }
 }

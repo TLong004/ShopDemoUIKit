@@ -34,6 +34,8 @@ class DetailViewController: UIViewController {
     var images: [String] = []
     var banner: String = ""
     var imagesRV: [UIImage] = []
+    var draftRating: Int = 0
+    var draftContent: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +147,9 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
             }
         case .review:
             (cell as? ReviewCell)?.delegate = self
+            (cell as? ReviewCell)?.rating = self.draftRating
+            (cell as? ReviewCell)?.updateUI(rating: self.draftRating)
+            (cell as? ReviewCell)?.content.text = self.draftContent
             (cell as? ReviewCell)?.selectedImages = self.imagesRV
             (cell as? ReviewCell)?.setReview(productId: self.product!.id)
         case .myReview:
@@ -155,6 +160,11 @@ extension DetailViewController: UICollectionViewDataSource, tapImageProductDeleg
 }
 
 extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, ReviewCellDelegate {
+    func didUpdateReviewData(content: String, rating: Int) {
+        self.draftRating = rating
+        self.draftContent = content
+    }
+    
     func didUpdateImages(images: [UIImage]) {
         self.imagesRV = images
         UIView.performWithoutAnimation {

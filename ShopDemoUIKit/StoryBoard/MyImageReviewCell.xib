@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gMN-7D-djn">
-                        <rect key="frame" x="8" y="8" width="302" height="149"/>
+                        <rect key="frame" x="8" y="0.0" width="302" height="157"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="10"/>
@@ -30,7 +30,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="gMN-7D-djn" secondAttribute="trailing" constant="8" id="55g-mf-Vmq"/>
                 <constraint firstItem="gMN-7D-djn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Fab-UM-7ec"/>
-                <constraint firstItem="gMN-7D-djn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="XAY-4I-ljR"/>
+                <constraint firstItem="gMN-7D-djn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XAY-4I-ljR"/>
                 <constraint firstAttribute="bottom" secondItem="gMN-7D-djn" secondAttribute="bottom" constant="8" id="j6Y-Kv-ztT"/>
             </constraints>
             <size key="customSize" width="318" height="165"/>
